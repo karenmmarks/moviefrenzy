@@ -1,0 +1,16 @@
+{
+    "name": "movie-frenzy-backend",
+    "version": "0.1.0",
+    "author": {
+        "name": "Karen Marks",
+        "email": "karenmarkswebdev@gmail.com"
+    },
+    "main": "index.js",
+    "scripts": {
+        "start": "node src/index.js"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.17.1"
+    }
+}
