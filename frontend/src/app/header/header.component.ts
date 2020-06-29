@@ -6,6 +6,8 @@ import { Component, OnInit, Output } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  title = 'Movie Frenzy';
+  isNavbarCollapsed = true;
 
   constructor() { }
 

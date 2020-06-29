@@ -1,19 +1,21 @@
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        
-            <a class="navbar-brand text-center" href="#">
-                <img class="d-inline-flex mr-1" width="50px" alt="Movie Frenzy Logo" src="assets/img/logo.png"/>
-                <p class="navbar-text text-primary">Movie Frenzy</p>
-            </a>
-        
-            <div class="navbar-nav float-left" role="navigation">
-                <div class="navbar-nav navbar-expand">
-                    <a href="#" class="nav-item nav-link mx-2 float-left-lg">Movies</a>
-                    <a href="#" class="nav-item nav-link mx-2 float-left">Review</a>
-                    <a href="#" class="nav-item nav-link mx-2">Login</a>
-                </div>              
-    
-            </div>
-          
+        <a class="navbar-brand text-primary text-bold" href="#">
+            <img class="d-inline-flex" width="50px" alt="Movie Frenzy Logo" src="assets/img/logo.png"/>
+            {{ title }}
+        </a>
+        <button class="navbar-toggler" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            &#9776;
+        </button>
+        <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Movies</a>
+                </li>
+                <li class="nav-item float-right">
+                    <a class="nav-link" href="#">Login</a>
+                </li>
+            </ul>
+        </div>         
     </div>
 </nav>

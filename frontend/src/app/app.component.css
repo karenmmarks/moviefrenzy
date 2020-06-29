@@ -256,3 +256,7 @@
     }
 */
   }
+  /* Adjusting ADA issues with Bootstrap colors */
+  .text-primary {
+    color: #002db3 !important;
+}
