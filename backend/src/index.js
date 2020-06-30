@@ -109,10 +109,18 @@ app.get('/login', async function (req, res){
     }
 });
 
+app.get('/movies', async function (_, res){ 
+    const movies = await select ('movies', 'name')
+        .then(function ( result ) {return result; } )
+        .catch( function ( error ) { res.send ( error ); } );
+    res.send( movies );
+});
+
+
 app.get('/movies/search/:name', async function (req, res){
     const { name } = req.params;
     if ( name ) {
-        let movies = await select ('movies', 'name', `name LIKE "%${name}%"`)
+        const movies = await select ('movies', 'name', `name LIKE "%${name}%"`)
             .then(function ( result ) {return result; } )
             .catch( function ( error ) { res.send ( error ); } );
             res.send ( movies );
@@ -124,6 +132,8 @@ app.get('/movies/search/:name', async function (req, res){
         });
     }
 });
+
+
 
 
 app.listen(port, console.info(`Listening at http://localhost:${port}`));
