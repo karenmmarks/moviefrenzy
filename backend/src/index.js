@@ -135,6 +135,5 @@ app.get('/movies/search/:name', async function (req, res){
 
 
 
-
 app.listen(port, console.info(`Listening at http://localhost:${port}`));
 

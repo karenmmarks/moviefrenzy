@@ -1,66 +1,40 @@
-<h1 class="mb-2">
+  <h1 class="mb-2">
     <img width="50" alt="Movie Frenzy Logo" src="assets/img/logo.png"/>
     Welcome to {{ title }}
   </h1>
- <!-- Search -->
-  <form class="form-inline  my-lg-0">
-    <div class="input-group">
-      <input class="form-control" type="search" placeholder="Enter Movie Name" aria-label="Search">
+ 
+  <!-- Search -->
+  <form class="form-inline  my-auto">
+    <fieldset>
+      <legend>Search to review our Movies</legend>
+      <div class="input-group">
+     
+      <input class="form-control" type="search" [(ngModel)]="searchMovie" name="searchMovie" placeholder="Enter Movie Name" aria-label="Enter Movie Name">
       <div class="input-group-append">
-        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+        <button class="btn btn-outline-primary my-2 my-sm-0"  (click)="getMovies(searchMovie)" type="submit">Search</button>
       </div>
     </div>
-  </form>
+  </fieldset>
+  </form> 
 
   <!-- Movies Display -->
-  <h2>Top Rated Movies</h2>
+  <h2 class="mt-4">Top Rated Movies</h2>
   <p>Here are some top rated movies to help you get started:</p>
   <div class="row mt-2">
     <div class="col-md-12">
-        <div class="card float-left"  *ngFor="let movie of movies" style="width: 250px; height: 550px;">
+        <div class="card float-left" *ngFor="let movie of movies" style="width: 250px; height: 500px;">
           <img class="card-img-top img-fluid img-thumbnail" style="max-width: 100%; height: 300px;" src="http://localhost:3000{{ movie.imageLink }}" alt="Movie poster of {{ movie.name }}">
           <div class="card-body">
-            <h5 class="card-title mb-2">{{ movie.name }}</h5>
+            <h3 class="card-title mb-2">{{ movie.name }}</h3>
             <p class="card-subtitle mb-2">{{ movie.description }}</p>
-            <!-- <p class="card-text mb-1">Feedback of movie1 goes here.</p>-->
-            <a href="#" class="btn btn-primary text-white">Add feedback</a>
+            <!-- <p class="card-text mb-1">Feedback of movie1 goes here.</p>
+            <a href="#" class="btn btn-primary text-white">Add feedback</a>-->
           </div>
         </div>
-
-
-
-         <!-- <div class="card float-left" style="width: 250px; height: 550px;">
-          <img class="card-img-top img-fluid img-thumbnail" style="max-width: 100%; height: 300px;" src="http://localhost:3000/images/houseofhummingbird.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title mb-2">House of Hummingbird</h5>
-            <p class="card-subtitle mb-2">Description of House of Hummingbird goes here.</p>
-            <p class="card-text text-muted mb-2">Feedback of movie2 goes here.</p>
-            <a href="#" class="btn btn-primary text-white">Add feedback</a>
-          </div>
-        </div>
-        <div class="card float-left"  style="width: 250px; height: 550px;">
-          <img class="card-img-top img-fluid img-thumbnail" style="max-width: 100%; height: 300px;" src="http://localhost:3000/images/uncutgems.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title mb-2">Uncut Gems</h5>
-            <p class="card-subtitle mb-2">Description of movie1 goes here.</p>
-            <p class="card-text mb-1">Feedback of movie1 goes here.</p>
-            <a href="#" class="btn btn-primary text-white">Add feedback</a>
-          </div>
-        </div>
-        <div class="card float-left" style="width: 250px; height: 550px;">
-          <img class="card-img-top img-fluid img-thumbnail" style="max-width: 100%; height: 300px;" src="http://localhost:3000/images/houseofhummingbird.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title mb-2">House of Hummingbird</h5>
-            <p class="card-subtitle mb-2">Description of House of Hummingbird goes here.</p>
-            <p class="card-text text-muted mb-2">Feedback of movie2 goes here.</p>
-            <a href="#" class="btn btn-primary text-white">Add feedback</a>
-          </div>
-        </div>-->
-
       </div>
     </div>
 
-    <app-edit-movies></app-edit-movies>
+ <!-- <app-edit-movies></app-edit-movies>-->
 
   
 

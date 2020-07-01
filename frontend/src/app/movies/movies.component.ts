@@ -1,6 +1,11 @@
 import {Location} from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Movie } from '../models/movie.model';
+
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-movies',
@@ -10,7 +15,8 @@ import { HttpClient } from '@angular/common/http';
 export class MoviesComponent implements OnInit {
   title = 'Movie Frenzy';
 
-  public movies: any [];
+  public movies: Movie[] = null;
+  searchMovie: any = '';
 
   constructor(
     private http: HttpClient,
@@ -20,23 +26,28 @@ export class MoviesComponent implements OnInit {
 
   public ngOnInit() {
     this.location.subscribe(() => {
-      this.refresh();
+      this.getMovies();
     });
-    this.refresh();
+    this.getMovies();
   }
 
-  public async refresh(query?: any) {
+  public async getMovies(query?: any) {
     let url = 'http://localhost:3000/movies';
-    if(query && query.target.value) {
-      url += `/search/${query.target.value}`;
+    if (query) {
+      url += `/search/${query}`;
     }
     this.http.get(url).subscribe( movies => {
       this.movies = (movies as any[]).map(movie => {
+        if (movie.name.length > 35) {
+          movie.name = movie.name.slice(0 , 35) + '...';
+        }
         if (movie.description.length > 100) {
-          movie.description = movie.description.slice(0 , 100) + '...';
+          movie.description = movie.description.slice(0 , 85) + '...';
         }
         return movie;
       });
     });
   }
+
 }
+
