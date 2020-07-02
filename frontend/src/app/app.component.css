@@ -257,6 +257,10 @@
 */
   }
   /* Adjusting ADA issues with Bootstrap colors */
-  .text-primary {
+  .text-primary  {
     color: #002db3 !important;
+}
+
+.btn .btn-outline-primary {
+  color: #002db3 !important;
 }
