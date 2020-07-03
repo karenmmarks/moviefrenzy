@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -25,9 +25,10 @@ export class RegisterComponent implements OnInit {
               private router: Router) {
   }
 
+  message = '';
   ngOnInit(){
     this.registerForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      userName: ['', Validators.required],
       password: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -39,8 +40,20 @@ export class RegisterComponent implements OnInit {
   }
   // Login based on username and password
    public postAccount() {
-      this.http.post(`http://localhost:3000/account`, this.registerForm).subscribe( account => {
-        this.account = (account as Account);
-     });
+    const serializedForm = {
+      account: this.registerForm.getRawValue()
+    };
+    this.http.post(`http://localhost:3000/account`, serializedForm).subscribe( result => {
+      if ( result['code'] === 400 ) {
+      // this.account = (account as Account);
+      this.message = result['message'];
+        this.registerForm.reset();
+      }
+      else {
+        this.account = (result as Account);
+      this.message = 'You are successfully registered!';
+      this.registerForm.reset();
+      }
+    });
     }
 }

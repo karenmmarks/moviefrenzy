@@ -4,9 +4,11 @@
         <form [formGroup]="registerForm">
             <fieldset>
                 <legend>Register</legend>
+                <span class="text-danger my-2" *ngIf="message.length > 0">{{ message }}</span>
                 <div class="form-group">
                     <label for="userName">Username</label>
-                    <input type="text" class="form-control w-50" formControlName="username" name="userName" id="userName" aria-describedby="userName">
+                    <input type="text" class="form-control w-50" formControlName="userName" name="userName" 
+                    id="userName" aria-describedby="userName">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
@@ -29,7 +31,7 @@
 
             
                 <div class="form-group">
-                    <button class="btn btn-primary" type="submit">
+                    <button class="btn btn-primary" (click)="postAccount()" type="submit">
                         Register
                     </button>
                     <a routerLink="/register" class="btn btn-link">Login</a>

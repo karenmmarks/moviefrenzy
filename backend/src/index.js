@@ -101,8 +101,7 @@ app.post('/login', async function (req, res){
             .catch( function ( error ) { res.send ( error ); } );
         if ( account && account[0] ) {
             // Check to make sure the password is correct
-            const same = bcrypt.compare(password, account[0].passwordHash);
-            console.log(same);
+            const same = await bcrypt.compare(password, account[0].passwordHash);
             if (same) {
                 delete account[0].passwordHash;
                 res.send ( account[0] );
