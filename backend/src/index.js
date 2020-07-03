@@ -2,7 +2,7 @@ const express = require ('express');
 const cors = require ('cors');
 const multer = require ('multer');
 const fs = require ('fs');
-const { insert, select } = require('./database/database');
+const { insert, select, selectProp } = require('./database/database');
 
 const app = express();
 const port = 3000;
@@ -10,7 +10,7 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-app.post('/create/account', async function (req, res){
+app.post('/account', async function (req, res){
     const { account } = req.body; 
     if ( account ) {
         //add hashing password
@@ -28,7 +28,7 @@ app.post('/create/account', async function (req, res){
     }   
 });
 
-app.post('/create/movie', async function (req, res){
+app.post('/movie', async function (req, res){
     const { movie } = req.body; 
     if ( movie ) {
         res.send (
@@ -45,7 +45,7 @@ app.post('/create/movie', async function (req, res){
     }   
 });
 
-app.post('/create/review', async function (req, res){
+app.post('/review', async function (req, res){
     const { review } = req.body; 
     if ( review ) {
         res.send (
@@ -132,6 +132,23 @@ app.get('/movies/search/:name', async function (req, res){
         });
     }
 });
+
+app.get('/movieNames/search/:name', async function (req, res){
+    const { name } = req.params;
+    if ( name ) {
+        const movies = await selectProp ('movies', 'name', 'name', `name LIKE "%${name}%"`)
+            .then(function ( result ) {return result; } )
+            .catch( function ( error ) { res.send ( error ); } );
+            res.send ( movies );
+    }
+    else {
+        res.send ( {
+            code: 400,
+            message: 'Missing search name'
+        });
+    }
+});
+
 
 
 

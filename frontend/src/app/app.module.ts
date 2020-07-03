@@ -2,7 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Ng2SearchPipeModule} from 'ng2-search-filter';
 
+import { Routes, RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
+
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -14,18 +16,26 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MoviesComponent } from './movies/movies.component';
 import { EditMoviesComponent } from './edit-movies/edit-movies.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './login/login.component';
 
+
+const appRoutes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'movies', component: MoviesComponent },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MoviesComponent,
-    EditMoviesComponent
+    EditMoviesComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     Ng2SearchPipeModule,
+    RouterModule.forRoot(appRoutes),
     AppRoutingModule,
     HttpClientModule,
     FormsModule,

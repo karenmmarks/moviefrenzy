@@ -10,7 +10,8 @@ import {map, startWith} from 'rxjs/operators';
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
-  styleUrls: ['./movies.component.css']
+  styleUrls: ['./movies.component.css'],
+  providers: []
 })
 export class MoviesComponent implements OnInit {
   title = 'Movie Frenzy';
@@ -20,8 +21,8 @@ export class MoviesComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private location: Location ){
-      this.movies = [];
+    private location: Location,
+     ){
     }
 
   public ngOnInit() {
@@ -31,12 +32,23 @@ export class MoviesComponent implements OnInit {
     this.getMovies();
   }
 
-  public async getMovies(query?: any) {
-    let url = 'http://localhost:3000/movies';
-    if (query) {
-      url += `/search/${query}`;
-    }
-    this.http.get(url).subscribe( movies => {
+  // Get all the movies to display
+  public getMovies() {
+    this.http.get('http://localhost:3000/movies').subscribe( movies => {
+      this.movies = (movies as any[]).map(movie => {
+        if (movie.name.length > 35) {
+          movie.name = movie.name.slice(0 , 35) + '...';
+        }
+        if (movie.description.length > 100) {
+          movie.description = movie.description.slice(0 , 85) + '...';
+        }
+        return movie;
+      });
+    });
+  }
+  // Get movies based on a search term
+  public getMoviesBy(query: string) {
+    this.http.get(`http://localhost:3000/movies/search/${query}`).subscribe( movies => {
       this.movies = (movies as any[]).map(movie => {
         if (movie.name.length > 35) {
           movie.name = movie.name.slice(0 , 35) + '...';

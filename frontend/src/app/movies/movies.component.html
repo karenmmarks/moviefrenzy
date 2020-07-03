@@ -1,22 +1,17 @@
-  <h1 class="mb-2">
-    <img width="50" alt="Movie Frenzy Logo" src="assets/img/logo.png"/>
-    Welcome to {{ title }}
-  </h1>
-  <hr>
- 
-  <!-- Search -->
+  
+ Search 
   <form class="form-inline  my-auto">
-    <fieldset>
-      <legend>Search to review our Movies</legend>
-      <div class="input-group">
-     
-      <input class="form-control" type="search" [(ngModel)]="searchMovie" name="searchMovie" placeholder="Enter Movie Name" aria-label="Enter Movie Name">
-      <div class="input-group-append mb-2">
-        <button class="btn btn-outline-primary my-2 my-sm-0"  (click)="getMovies(searchMovie)" type="submit">Search</button>
-      </div>
-    </div>
-  </fieldset>
-  </form> 
+      <fieldset>
+        <legend>Search to review our Movies</legend>
+        <div class="input-group">
+          <input class="form-control w-50" type="search" [(ngModel)]="searchMovie" name="searchMovie" placeholder="Enter Movie Name" aria-label="Enter Movie Name">
+          <div class="input-group-append mb-2">
+            <button class="btn btn-outline-primary"  (click)="getMoviesBy(searchMovie)" type="submit">Search</button>
+          </div>
+        </div>
+      </fieldset>
+  </form>
+
   <hr>
   <!-- Movies Display -->
   <h2 class="mt-4">Top Rated Movies</h2>
@@ -32,8 +27,8 @@
             <a href="#" class="btn btn-primary text-white">Add feedback</a>-->
           </div>
         </div>
-      </div>
     </div>
+  </div>
 
  <!-- <app-edit-movies></app-edit-movies>-->
 

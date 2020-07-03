@@ -74,5 +74,39 @@ module.exports = {
         }
       });
     });
+  },
+
+  selectProp (table, orderByProp, prop, where = null, direction ='ASC' ) {
+    return new Promise(function (resolve, reject) {
+      const connection = connect();
+
+      const query = `
+        SELECT ${prop}
+        FROM ${table} 
+        ${(where) ? `WHERE ${where}` : ''}
+        ORDER BY ${orderByProp} ${direction}`; 
+
+      connection.query(query, function (error, result) {
+        if (error) {
+          connection.end();
+          reject ({ 
+            code: 500,
+            message: 'Error Selecting data'
+          });
+        } 
+        else {
+          connection.end();
+          resolve (
+            result.map(function(row) {
+              let data = {};
+              Object.keys(row).forEach(function (key){
+                data[key] = row[key];    
+              });
+              return data; 
+          }));  
+        }
+      });
+    });
   } 
+
 }
