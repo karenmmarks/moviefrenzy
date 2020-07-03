@@ -23,7 +23,7 @@ export class MovieService {
   getMovies() {
     let movies: Movie[] = [];
 
-    this.http.get<Movie[]>('http://localhost:3000/movies').forEach( result => {
+    this.http.get<Movie[]>('http://50.29.151.120:3000/movies').forEach( result => {
       movies = (result as Movie[]).map(movie => {
         return movie;
       });
@@ -35,7 +35,7 @@ export class MovieService {
   // returns only movie names in search bar
   getNamesSearch(query: string) {
     let movies: Movie[] = [];
-    this.http.get<Movie[]>(`http://localhost:3000/movieNames/search/${query}`)
+    this.http.get<Movie[]>(`http://50.29.151.120:3000/movieNames/search/${query}`)
     .subscribe( result => {
       movies = (result as Movie[]).map(movie => {
         return movie;
@@ -47,7 +47,7 @@ export class MovieService {
   // returns all movie info
   async getSearch(query: string) {
     let movies: Movie[] = [];
-    this.http.get<Movie[]>(`http://localhost:3000/movies/search/${query}`)
+    this.http.get<Movie[]>(`http://50.29.151.120:3000/movies/search/${query}`)
     .subscribe( result => {
       movies = (result as Movie[]).map(movie => {
         return movie;
@@ -58,7 +58,7 @@ export class MovieService {
   }
 
   createMovie(movie: Movie, image: any) {
-    this.http.post('http://localhost:3000/movie', movie);
-    this.http.post(`http://localhost:3000/upload/${(movie.name).replace(' ', '')}`, image);
+    this.http.post('http://50.29.151.120:3000/movie', movie);
+    this.http.post(`http://50.29.151.120:3000/upload/${(movie.name).replace(' ', '')}`, image);
   }
 }

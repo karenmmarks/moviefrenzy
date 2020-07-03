@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit {
     const serializedForm = {
       account: this.registerForm.getRawValue()
     };
-    this.http.post(`http://localhost:3000/account`, serializedForm).subscribe( result => {
+    this.http.post(`http://50.29.151.120:3000/account`, serializedForm).subscribe( result => {
       if ( result['code'] === 400 ) {
       this.message = result['message'];
         this.registerForm.reset();

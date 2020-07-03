@@ -173,5 +173,5 @@ app.get('/movieNames/search/:name', async function (req, res){
 
 
 
-app.listen(port, console.info(`Listening at http://localhost:${port}`));
+app.listen(port, console.info(`Listening at http://50.29.151.120:${port}`));
 

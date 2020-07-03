@@ -21,7 +21,7 @@
       <div class="row mt-2">
         <div class="col-md-12">
             <div class="card float-left" *ngFor="let movie of movies | filter: searchMovie" style="width: 250px; height: 525px;">
-              <img class="card-img-top img-responsive img-thumbnail" style="max-width: 100%; height: 320px;" src="http://localhost:3000{{ movie.imageLink }}" alt="Movie poster of {{ movie.name }}">
+              <img class="card-img-top img-responsive img-thumbnail" style="max-width: 100%; height: 320px;" src="http://50.29.151.120:3000{{ movie.imageLink }}" alt="Movie poster of {{ movie.name }}">
               <div class="card-body">
                 <h3 class="card-title mb-2">{{ movie.name }}</h3>
                 <p class="card-subtitle mb-2">{{ movie.description }}</p>

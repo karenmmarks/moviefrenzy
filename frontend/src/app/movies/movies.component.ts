@@ -34,7 +34,7 @@ export class MoviesComponent implements OnInit {
 
   // Get all the movies to display
   public getMovies() {
-    this.http.get('http://localhost:3000/movies').subscribe( movies => {
+    this.http.get('http://50.29.151.120:3000/movies').subscribe( movies => {
       this.movies = (movies as any[]).map(movie => {
         if (movie.name.length > 35) {
           movie.name = movie.name.slice(0 , 35) + '...';
@@ -48,7 +48,7 @@ export class MoviesComponent implements OnInit {
   }
   // Get movies based on a search term
   public getMoviesBy(query: string) {
-    this.http.get(`http://localhost:3000/movies/search/${query}`).subscribe( movies => {
+    this.http.get(`http://50.29.151.120:3000/movies/search/${query}`).subscribe( movies => {
       this.movies = (movies as any[]).map(movie => {
         if (movie.name.length > 35) {
           movie.name = movie.name.slice(0 , 35) + '...';

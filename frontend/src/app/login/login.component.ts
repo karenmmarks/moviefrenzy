@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
   // Login based on username and password
   public postLogin() {
     const serializedForm = this.loginForm.getRawValue();
-    this.http.post(`http://localhost:3000/login`, serializedForm).subscribe( result => {
+    this.http.post(`http://50.29.151.120:3000/login`, serializedForm).subscribe( result => {
       if ( result['message'] ) {
         this.message = result['message'];
         this.loginForm.reset();
