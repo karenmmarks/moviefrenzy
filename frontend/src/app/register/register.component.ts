@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../models/user.model';
 import { HttpClient } from '@angular/common/http';
@@ -16,7 +16,9 @@ export class RegisterComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  account: Account;
+  account: User;
+
+  @Input() public successMessage: string;
 
   constructor(private http: HttpClient,
               private location: Location,
@@ -26,6 +28,8 @@ export class RegisterComponent implements OnInit {
   }
 
   message = '';
+  registered = 'false';
+  
   ngOnInit(){
     this.registerForm = this.formBuilder.group({
       userName: ['', Validators.required],
@@ -45,14 +49,16 @@ export class RegisterComponent implements OnInit {
     };
     this.http.post(`http://localhost:3000/account`, serializedForm).subscribe( result => {
       if ( result['code'] === 400 ) {
-      // this.account = (account as Account);
       this.message = result['message'];
         this.registerForm.reset();
       }
       else {
-        this.account = (result as Account);
-      this.message = 'You are successfully registered!';
-      this.registerForm.reset();
+        this.account = (result as User);
+        this.registered = 'true';
+        this.message = 'You are successfully registered!';
+        this.registerForm.reset();
+        this.router.navigate(['/']);
+        // this.successMessage = `Hi ${this.account.firstName}`;
       }
     });
     }

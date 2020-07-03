@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
     }
 
   message = '';
+  loggedIn = 'false';
   ngOnInit(){
     this.loginForm = this.formBuilder.group({
       userName: ['', Validators.required],
@@ -47,7 +48,9 @@ export class LoginComponent implements OnInit {
       else {
       this.account = (result as Account);
       this.message = 'You are successfully logged in!';
+      this.loggedIn = 'true';
       this.loginForm.reset();
+      this.router. navigate(['/']);
 
     }
     });
