@@ -15,7 +15,7 @@ $ npm start
 ```
 This calls the start script, which is defined as: ```node src/index.js```. The server will then be specified on the given port.
 
-##  Post Mordem
+##  Post Mortem
 
 This project was begun to apply for a Front-End Web Developer - Entry Level position. I had a week to complete this website in the Framework of my choice. I choose Angular not because I am an expert, but more to learn the most and grow as a web programmer. I knew it would be a challenge to accomplish this but I was determined to not give up until I ran out of time or finished, whichever came first. 
 
