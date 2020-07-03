@@ -3,6 +3,7 @@ const cors = require ('cors');
 const multer = require ('multer');
 const fs = require ('fs');
 const { insert, select, selectProp } = require('./database/database');
+const bcrypt = require('bcrypt');
 
 const app = express();
 const port = 3000;
@@ -10,10 +11,15 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
+// creating an account
 app.post('/account', async function (req, res){
     const { account } = req.body; 
     if ( account ) {
-        //add hashing password
+        // add hashing password
+        account.passwordHash = await bcrypt.hash(String(account.password),10);
+        // delete the password
+        delete account.password;
+
         res.send (
             await insert ('accounts', Object.keys(account), Object.values(account))
                 .then( function ( result ) { return result; } )
@@ -28,6 +34,7 @@ app.post('/account', async function (req, res){
     }   
 });
 
+// adding a movie
 app.post('/movie', async function (req, res){
     const { movie } = req.body; 
     if ( movie ) {
@@ -45,6 +52,7 @@ app.post('/movie', async function (req, res){
     }   
 });
 
+// adding a review
 app.post('/review', async function (req, res){
     const { review } = req.body; 
     if ( review ) {
@@ -84,22 +92,34 @@ app.get('/images/:image', function (req, res){
     res.sendFile (`./database/images/${req.params.image}`, { root: __dirname });
 });
 
-app.get('/login', async function (req, res){
+// login
+app.post('/login', async function (req, res){
     const { userName, password } = req.body;
     if ( userName && password ) {
-        let account = await select ('accounts', 'userName', `userName="${userName}" AND passwordHash="${password}"`)
+        let account = await select ('accounts', 'userName', `userName="${userName}"`)
             .then(function ( result ) {return result; } )
             .catch( function ( error ) { res.send ( error ); } );
         if ( account && account[0] ) {
-            delete account[0].passwordHash;
-            res.send ( account[0] );
+            // Check to make sure the password is correct
+            const same = bcrypt.compare(password, account[0].passwordHash);
+            console.log(same);
+            if (same) {
+                delete account[0].passwordHash;
+                res.send ( account[0] );
+            } 
+            else {
+                res.send ( {
+                    code: 400,
+                    message: 'Incorrect login information entered'
+                });
+            } 
         }
         else {
             res.send ( {
                 code: 400,
-                message: 'Incorrect login information'
+                message: 'Username does not exist'
             });
-        } 
+        }
     }
     else {
         res.send ( {
@@ -109,6 +129,7 @@ app.get('/login', async function (req, res){
     }
 });
 
+// Get movie info
 app.get('/movies', async function (_, res){ 
     const movies = await select ('movies', 'name')
         .then(function ( result ) {return result; } )
@@ -116,7 +137,7 @@ app.get('/movies', async function (_, res){
     res.send( movies );
 });
 
-
+// Get Movies searching by name
 app.get('/movies/search/:name', async function (req, res){
     const { name } = req.params;
     if ( name ) {
@@ -133,6 +154,7 @@ app.get('/movies/search/:name', async function (req, res){
     }
 });
 
+// Get Movies with drop down autocomplete  not implemented yet on front-end
 app.get('/movieNames/search/:name', async function (req, res){
     const { name } = req.params;
     if ( name ) {

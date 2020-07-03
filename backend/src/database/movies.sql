@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS accounts (
     userName varchar(255) NOT NULL,
-    passwordHash varchar(255) NOT NULL,
+    passwordHash char(255) NOT NULL,
     firstName varchar(255) NOT NULL,
     lastName varchar(255) NOT NULL,
     email varchar(255) NOT NULL,

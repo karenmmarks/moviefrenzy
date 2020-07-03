@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-
+import { ReactiveFormsModule} from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -17,11 +17,13 @@ import { MoviesComponent } from './movies/movies.component';
 import { EditMoviesComponent } from './edit-movies/edit-movies.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'movies', component: MoviesComponent },
+  { path: 'register', component: RegisterComponent }
 ];
 
 @NgModule({
@@ -30,7 +32,9 @@ const appRoutes: Routes = [
     HeaderComponent,
     MoviesComponent,
     EditMoviesComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +43,7 @@ const appRoutes: Routes = [
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     NgbModule,
     FontAwesomeModule,
     BrowserAnimationsModule

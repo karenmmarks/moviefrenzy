@@ -2,39 +2,25 @@
 <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <form>
+        <form [formGroup]="loginForm">
             <fieldset>
                 <legend>Login</legend>
                 <div class="form-group">
                     <label for="userName">Username</label>
-                    <input type="text" class="form-control w-50" name="userName" id="firstName" aria-describedby="userName">
+                    <input type="text" class="form-control w-50" formControlName="username" name="userName" id="userName" aria-describedby="userName">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control w-50" name="password" id="password" aria-describedby="password">
-                </div>
-
-            <!--    <div class="form-group">
-                    <label for="firstName">First name</label>
-                    <input type="text" class="form-control w-50" name="firstName" id="firstName" aria-describedby="firstName">
+                    <input type="password" class="form-control w-50" formControlName="password" name="password" id="password" aria-describedby="password">
                 </div>
                 <div class="form-group">
-                    <label for="lastName">Last name</label>
-                    <input type="text" class="form-control w-50" name="lastName" id="lastName" aria-describedby="lastName">
-                </div>-->
-            
-                <div class="form-group">
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary"  type="submit">
                         Login
                     </button>
                     <a routerLink="/register" class="btn btn-link">Register</a>
                 </div>
             </fieldset>
         </form>
-
-
-
-
       </div>
   </div>
 </div>

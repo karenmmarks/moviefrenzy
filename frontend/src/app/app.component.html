@@ -3,30 +3,14 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-  <!--<form class="form-inline  my-auto">
-          <fieldset>
-            <legend>Search to review our Movies</legend>
-            <div class="input-group">
-            <input class="form-control w-50" type="search" [(ngModel)]="searchMovie" name="searchMovie" placeholder="Enter Movie Name" aria-label="Enter Movie Name">
-              <div class="input-group-append mb-2">
-                <button class="btn btn-outline-primary"  (click)="getSearch(searchMovie)" type="submit">Search</button>
-              </div>
-            </div>
-          </fieldset>
-      </form> -->
 
+         <!--<app-login></app-login>-->
         <router-outlet></router-outlet>
-        <!--<app-login></app-login>-->
-        
-        <!--<app-movies></app-movies>-->
-  
-        <!-- Footer -->
-        <footer>
-            Footer&nbsp;
-            
-        </footer>
 
-        
+        <app-movies></app-movies>
+       
+        <app-footer></app-footer>
+
       </div>
   </div>
 </div>

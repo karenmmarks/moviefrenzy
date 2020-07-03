@@ -6,12 +6,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
+export class RegisterComponent implements OnInit {
+  registerForm: FormGroup;
   loading = false;
   submitted = false;
   returnUrl: string;
@@ -21,28 +21,24 @@ export class LoginComponent implements OnInit {
   constructor(private http: HttpClient,
               private location: Location,
               private formBuilder: FormBuilder) {
-    }
+  }
 
   ngOnInit(){
-    this.loginForm = this.formBuilder.group({
+    this.registerForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', Validators.required]
     });
 
-     // get return url from route parameters or default to '/'
+    // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
-    // snapshot:
-    // {
-    // url: [{ path: 1 }, { path: 2 }]
-    //  }
-
   }
-
   // Login based on username and password
-  public postLogin() {
-    this.http.post(`http://localhost:3000/login`, this.loginForm).subscribe( account => {
-      this.account = (account as Account);
-    });
-  }
+   public postAccount() {
+      this.http.post(`http://localhost:3000/account`, this.registerForm).subscribe( account => {
+        this.account = (account as Account);
+     });
+    }
 }
-
